@@ -1,8 +1,8 @@
 package nttdata.javat2.business;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 /**
  * Almacena los empleados dentro de un mapa, siendo la key el valor del id
@@ -24,13 +24,20 @@ public class ManagmentServicel {
 	 * @param category
 	 */
 	public void addEmployee(String name, String category) {
+		//Se comprueba si hay algun empleado almacenado, si no el primer empleado tendra 0 como id
 		if (employeeData.isEmpty()) {
 			int id = 0;
 			Employee employee = new Employee(id, name, category);
 			employeeData.put(id, employee);
 		} else {
-			TreeSet<Integer> employeeId = (TreeSet<Integer>) employeeData.keySet();
-			int nextId = employeeId.last() + 1;
+			//Se extrae todas los id
+			Set<Integer> employeeIdSet = employeeData.keySet();
+			//Se convierte de Set a Array
+			Integer[] employeeIdArray = new Integer[employeeIdSet.size()];
+			employeeIdArray = employeeIdSet.toArray(employeeIdArray);
+			//Se extrae el ultimo id y se le suma 1
+			int nextId = employeeIdArray[employeeIdArray.length-1] + 1;
+			//Se crea y añade un nuevo empleado con los datos pasados por parametro y el nuevo id
 			Employee employee = new Employee(nextId, name, category);
 			employeeData.put(nextId, employee);
 		}
@@ -46,7 +53,7 @@ public class ManagmentServicel {
 	/**
 	 * Muestra el numero de empleados guardados
 	 */
-	public void showNumEmployee() {
-		System.out.println(employeeData.size());
+	public Integer showNumEmployee() {
+		return employeeData.size();
 	}
 }

@@ -15,12 +15,12 @@ public class T2MainVCA {
 	 */
 	public static void main(String[] args) {
 		ManagmentServicel ms = new ManagmentServicel();
+		//Cuando se registra un nuevo empleado NO se pone manualmente el id, solo los datos
 		ms.addEmployee("Juan", "Contabilidad");
-		ms.showEmployee();
-		ms.showNumEmployee();
 		ms.addEmployee("Miguel", "Consultoria");
+		ms.addEmployee("Luis", "Consultoria");
 		ms.showEmployee();
-		ms.showNumEmployee();
+		System.out.println("Numero de empleados: " + ms.showNumEmployee());
 	}
 
 }
